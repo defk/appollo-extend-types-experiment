@@ -1,0 +1,16 @@
+type Query {
+    videoStation: [VideoStation]
+}
+
+type VideoStation {
+    id: Int
+    kilometer: Int
+    meter: Int
+    road: Road
+}
+
+type Road {
+    id: Int
+    title: String
+    code: String
+}
