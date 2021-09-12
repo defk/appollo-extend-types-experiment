@@ -11,5 +11,8 @@
             "email": "avsenko@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "webonyx/graphql-php": "^14.9",
+        "php": "8.0.*"
+    }
 }

@@ -1,0 +1,9 @@
+type Query {
+    videoStationSurface: [videoStationSurface]
+}
+
+type videoStationSurface {
+    imageId: Int
+    isSurface: Boolean
+    reaction: String
+}
