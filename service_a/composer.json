@@ -1,0 +1,16 @@
+{
+    "name": "defk/service_a",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Andrey Senko",
+            "email": "avsenko@gmail.com"
+        }
+    ],
+    "require": {}
+}
