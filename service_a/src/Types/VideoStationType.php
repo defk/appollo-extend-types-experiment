@@ -2,6 +2,7 @@
 
 namespace App\Types;
 
+use App\Service;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
 
@@ -24,6 +25,10 @@ class VideoStationType extends ObjectType
                     'type' => Type::int(),
                     'resolve' => static fn(array $content): int => $content['meter'],
                 ],
+                'road' => [
+                    'type' => Service::getType(RoadType::class),
+                    'resolve' => static fn(array $content): array => $content['road'],
+                ]
             ]
         ]);
     }

@@ -16,6 +16,11 @@ try {
     $query = $input['query'];
     $variableValues = $input['variables'] ?? null;
 
+    file_put_contents(
+        '/dev/shm/q.log',
+        $rawInput
+    );
+
     $rootValue = [];
     $result = GraphQL::executeQuery($schema, $query, $rootValue, null, $variableValues);
     $output = $result->toArray();
@@ -29,4 +34,4 @@ try {
 }
 
 header('Content-Type: application/json; charset=UTF-8');
-echo json_encode($output);
+echo json_encode($output, JSON_PRETTY_PRINT);

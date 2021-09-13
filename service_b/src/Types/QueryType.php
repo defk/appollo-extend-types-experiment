@@ -19,9 +19,17 @@ class QueryType extends ObjectType
                         'sdl' => file_get_contents(__DIR__.'/../scheme.graphql'),
                     ],
                 ],
-                'videoStationSurface' => [
-                    'type' =>  Type::listOf(Service::getType(VideoStationSurfaceType::class)),
-                    'resolve' => static fn(): array => (new Service())->getItems(),
+                '_entities' => [
+                    'type' => Type::listOf(Service::getType(VideoStationType::class)),
+                    'args' => [
+                        'representations' => [
+                            'type' => Type::listOf(Service::getType(AnyScalar::class))
+                        ]
+                    ],
+                    'resolve' => static function($root, $payload) {
+                        $stationIds = array_column($payload['representations'], 'id');
+                        return (new Service())->getItems($stationIds);
+                    }
                 ],
             ]
         ]);

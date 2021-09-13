@@ -9,24 +9,34 @@ class Service
     public static function getType(string $type): Type {
         return new $type;
     }
-    public function getItems():array
+    public function getItems(array $stationIds):array
     {
-        return [
+        $content = [
             [
-                'imageId' => 1,
-                'isSurface' => null,
+                'id' => 1,
+                'imageId' => 581,
+                'isSurface' => false,
                 'reaction' => null,
             ],
             [
-                'imageId' => 2,
+                'id' => 2,
+                'imageId' => 644,
                 'isSurface' => false,
                 'reaction' => 'negative',
             ],
             [
-                'imageId' => 3,
+                'id' => 3,
+                'imageId' => 2907,
                 'isSurface' => true,
                 'reaction' => 'positive',
             ],
         ];
+        return
+        array_values(
+            array_filter(
+                $content,
+                static fn(array $item):bool => in_array($item['id'], $stationIds)
+            )
+        );
     }
 }

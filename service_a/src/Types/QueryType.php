@@ -21,7 +21,10 @@ class QueryType extends ObjectType
                 ],
                 'videoStation' => [
                     'type' =>  Type::listOf(Service::getType(VideoStationType::class)),
-                    'resolve' => static fn(): array => (new Service())->getItems(),
+                    'args' => [
+                        'stationIds' => Type::listOf(Type::int()),
+                    ],
+                    'resolve' => static fn($root, $payload): array => (new Service())->getItems($payload),
                 ],
             ]
         ]);

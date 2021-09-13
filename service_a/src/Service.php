@@ -9,9 +9,9 @@ class Service
     public static function getType(string $type): Type {
         return new $type;
     }
-    public function getItems():array
+    public function getItems(array $payload):array
     {
-        return [
+        $content = [
             [
                 'id' => 1,
                 'kilometer' => 0,
@@ -43,5 +43,17 @@ class Service
                 ],
             ],
         ];
+
+        if (null !== ($stationIds = $payload['stationIds'] ?? null)) {
+            return
+                array_values(
+                    array_filter(
+                        $content,
+                        static fn(array $item): bool => in_array($item['id'], $stationIds)
+                    )
+                );
+        }
+
+        return $content;
     }
 }

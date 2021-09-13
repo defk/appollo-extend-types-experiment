@@ -1,9 +1,23 @@
-type Query {
-    videoStationSurface: [videoStationSurface]
-}
 
-type videoStationSurface {
+scalar _FieldSet
+scalar _Any
+
+directive @external on FIELD_DEFINITION
+directive @requires(fields: _FieldSet!) on FIELD_DEFINITION
+directive @provides(fields: _FieldSet!) on FIELD_DEFINITION
+directive @key(fields: _FieldSet!) on OBJECT | INTERFACE
+
+directive @extends on OBJECT | INTERFACE
+
+union _Entity = VideoStation
+
+extend type VideoStation @key(fields: "id") {
+    id: Int! @external
     imageId: Int
     isSurface: Boolean
     reaction: String
+}
+
+extend type Query {
+    _entities(representations: [_Any!]!): [_Entity]!
 }

@@ -1,9 +1,9 @@
-type Query {
-    videoStation: [VideoStation]
+extend type Query {
+    videoStation (stationIds: [Int!]): [VideoStation]
 }
 
-type VideoStation {
-    id: Int
+type VideoStation @key(fields: "id") {
+    id: Int!
     kilometer: Int
     meter: Int
     road: Road

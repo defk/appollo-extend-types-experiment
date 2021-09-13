@@ -5,13 +5,17 @@ namespace App\Types;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
 
-class VideoStationSurfaceType extends ObjectType
+class VideoStationType extends ObjectType
 {
     public function __construct()
     {
         parent::__construct([
-            'name' => 'VideoStationSurface',
+            'name' => 'VideoStation',
             'fields' => [
+                'id' => [
+                    'type' => Type::int(),
+                    'resolve' => static fn(array $content): int => $content['id'],
+                ],
                 'imageId' => [
                     'type' => Type::int(),
                     'resolve' => static fn(array $content): int => $content['imageId'],
